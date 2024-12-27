@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const IconComponent = ({ tabindex, onClick, tweetId, defaultClickedState = false }) => {
+const IconComponent = ({ tabindex, onClick, tweetId, tweetLinkElement, defaultClickedState = false }) => {
   const isHomepage = window.location.pathname === "/home" || /^[\/][a-zA-Z0-9_-]+$/.test(window.location.pathname);
   const isStatusPage = window.location.pathname.includes("/status");
 
@@ -73,10 +73,28 @@ const IconComponent = ({ tabindex, onClick, tweetId, defaultClickedState = false
     const newClickedState = !isClicked;
     setIsClicked(newClickedState);
 
-    // Save the new state to localStorage immediately on click
     localStorage.setItem(tweetId, newClickedState.toString());
 
-    onClick(tweetId, newClickedState); // Notify parent about the new state
+    onClick(tweetId, newClickedState); 
+
+    // OKAY we have the objects comming in safe and sound
+    //behavior is still good enough
+    //create a new useState ARray to take in these objetcs
+    //check if it exists already...if it does than remove it from the array
+    //otheriswe just add it to the array 
+
+
+
+
+
+    // Create tweet object
+    const tweetObj = {
+      id: tweetId.split("/").pop(),
+      username: tweetId.split("/")[3],
+      tweetLink: tweetId,
+    };
+    console.log(tweetObj)
+
   };
 
   const iconStyles = {
@@ -85,6 +103,9 @@ const IconComponent = ({ tabindex, onClick, tweetId, defaultClickedState = false
     borderRadius: "50%",
     transition: "color 0.3s ease, transform 0.3s ease",
   };
+
+
+
 
   return (
     <button

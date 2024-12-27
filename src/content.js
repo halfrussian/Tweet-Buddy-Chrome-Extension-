@@ -22,6 +22,7 @@ function addReactIconToTweet(tweetElement) {
     <IconComponent
       tabindex={likeButton.tabIndex}
       tweetId={tweetId}
+      tweetLinkElement={tweetLinkElement}
       defaultClickedState={initialState[tweetId] === "true"}
       onClick={(id, isClicked) => {
         initialState[id] = isClicked.toString();
