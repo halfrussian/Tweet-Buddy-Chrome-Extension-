@@ -7,14 +7,18 @@ let processedTweets = new Set();
 function addReactIconToTweet(tweetElement) {
   if (processedTweets.has(tweetElement)) return;
 
-  const likeButton = tweetElement.querySelector('[data-testid="like"]');
-  if (likeButton) {
+  const likeButton = tweetElement.querySelector('[data-testid="like"], [data-testid="unlike"]');
+  if (likeButton && (likeButton.dataset.testid === "like" || likeButton.dataset.testid === "unlike")) {
     const iconWrapper = document.createElement("div");
     iconWrapper.className = "react-icon-wrapper";
 
-    // Render the React component
+    // Get tabindex dynamically from the like button
+    const tabindex = likeButton.tabIndex;  // Use the tabIndex property
+    console.log(tabindex)
+
+    // Render the React component with the correct tabindex
     createRoot(iconWrapper).render(
-      <IconComponent onClick={() => console.log("Icon clicked!")} />
+      <IconComponent tabindex={tabindex} onClick={() => console.log("Icon clicked!")} />
     );
 
     likeButton.parentNode.insertBefore(iconWrapper, likeButton.nextSibling);
