@@ -4,7 +4,12 @@ const IconComponent = ({ tabindex, onClick }) => {
   const isHomepage = window.location.pathname === "/home" || /^[\/][a-zA-Z0-9_-]+$/.test(window.location.pathname);
   const isStatusPage = window.location.pathname.includes("/status");
 
-  const hoverColor = "#58a6ff"; // Light blue hex color
+  //const hoverColor = "#58a6ff"; // Light blue hex color
+  const hoverColor = {
+    color: "#58a6ff",
+    backgroundColor: ""
+  }
+
 
   const homepageTabZeroStyles = {
     marginLeft: "5px",
@@ -32,7 +37,7 @@ const IconComponent = ({ tabindex, onClick }) => {
 
   const statusPageTabOneStyles = {
     marginLeft: "20px",
-    marginTop: "18px",
+    marginTop: "17px",
     marginBottom: "10px",
     color: "#71767B",
     cursor: "pointer",
@@ -69,11 +74,12 @@ const IconComponent = ({ tabindex, onClick }) => {
     ...currentStyles,
     borderRadius: "50%",
     transition: "background-color 0.3s ease, transform 0.3s ease",
+    ...(isHovered ? hoverColor : {}),
   };
 
   const svgStyles = {
     transition: "fill 0.3s ease",
-    fill: isHovered ? hoverColor : "currentColor", // Apply hover color based on hover state
+    fill: isHovered ? hoverColor.color : "currentColor", // Apply hover color based on hover state
   };
 
   const handleMouseEnter = () => {
@@ -109,8 +115,8 @@ const IconComponent = ({ tabindex, onClick }) => {
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 16 16"
-            width="16"
-            height="16"
+            width="17"
+            height="17"
             style={svgStyles}
             onMouseEnter={handleMouseEnter} // Add mouse enter event
             onMouseLeave={handleMouseLeave} // Add mouse leave event

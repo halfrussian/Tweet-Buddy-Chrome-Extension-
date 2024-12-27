@@ -12,13 +12,24 @@ function addReactIconToTweet(tweetElement) {
     const iconWrapper = document.createElement("div");
     iconWrapper.className = "react-icon-wrapper";
 
-    // Get tabindex dynamically from the like button
-    const tabindex = likeButton.tabIndex;  // Use the tabIndex property
-    console.log(tabindex)
+   
+    const tabindex = likeButton.tabIndex;  
 
-    // Render the React component with the correct tabindex
+  
+    const tweetLinkElement = tweetElement.querySelector("a[href*='/status/']");
+    const tweetLink = tweetLinkElement ? tweetLinkElement.href : null;
+    
     createRoot(iconWrapper).render(
-      <IconComponent tabindex={tabindex} onClick={() => console.log("Icon clicked!")} />
+      <IconComponent
+        tabindex={tabindex}
+        onClick={() => {
+          if (tweetLink) {
+            console.log("Tweet Link:", tweetLink);
+          } else {
+            console.log("Tweet link not found!");
+          }
+        }}
+      />
     );
 
     likeButton.parentNode.insertBefore(iconWrapper, likeButton.nextSibling);
