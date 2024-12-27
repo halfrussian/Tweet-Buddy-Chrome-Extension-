@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 const IconComponent = ({ tabindex, onClick }) => {
-  const isHomepage = window.location.pathname === "/home";
+  const isHomepage = window.location.pathname === "/home" || /^[\/][a-zA-Z0-9_-]+$/.test(window.location.pathname);
   const isStatusPage = window.location.pathname.includes("/status");
 
   const hoverColor = "#58a6ff"; // Light blue hex color
@@ -11,6 +11,7 @@ const IconComponent = ({ tabindex, onClick }) => {
     marginTop: "5px",
     marginBottom: "5px",
     color: "#71767B",
+    cursor: "pointer",
   };
 
   const homepageTabOneStyles = {
@@ -18,6 +19,7 @@ const IconComponent = ({ tabindex, onClick }) => {
     marginTop: "13px",
     marginBottom: "10px",
     color: "#71767B",
+    cursor: "pointer",
   };
 
   const statusPageTabZeroStyles = {
@@ -25,6 +27,7 @@ const IconComponent = ({ tabindex, onClick }) => {
     marginTop: "10px",
     marginBottom: "10px",
     color: "#71767B",
+    cursor: "pointer",
   };
 
   const statusPageTabOneStyles = {
@@ -32,6 +35,7 @@ const IconComponent = ({ tabindex, onClick }) => {
     marginTop: "18px",
     marginBottom: "10px",
     color: "#71767B",
+    cursor: "pointer",
   };
 
   const [currentStyles, setCurrentStyles] = useState(
