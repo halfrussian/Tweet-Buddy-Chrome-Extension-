@@ -1,0 +1,24 @@
+{
+    "manifest_version": 3,
+    "name": "Tweet Buddy",
+    "version": "1.0",
+    "description": "Add an icon to Twitter posts.",
+    "icons": {
+       "16": "icon.png"
+    },
+    "permissions": [
+      "activeTab"
+    ],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "content_scripts": [
+      {
+        "matches": ["https://x.com/*"],
+        "js": ["content.js"]
+      }
+    ],
+    "action": {
+      "default_popup": "index.html"
+    }
+  }
