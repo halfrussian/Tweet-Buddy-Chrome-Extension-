@@ -6,6 +6,7 @@ const IconComponent = ({ tabindex, onClick, tweetId, tweetLinkElement, defaultCl
 
   const [isClicked, setIsClicked] = useState(defaultClickedState); // Persist click state
   const [isHovered, setIsHovered] = useState(false); // Track hover state
+ 
 
   const hoverColor = "#58a6ff";
   const defaultColor = "#71767B";
@@ -69,33 +70,30 @@ const IconComponent = ({ tabindex, onClick, tweetId, tweetLinkElement, defaultCl
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
 
+ 
   const handleClick = () => {
     const newClickedState = !isClicked;
     setIsClicked(newClickedState);
 
-    localStorage.setItem(tweetId, newClickedState.toString());
+    onClick(tweetId, newClickedState);
 
-    onClick(tweetId, newClickedState); 
-
-    // OKAY we have the objects comming in safe and sound
-    //behavior is still good enough
-    //create a new useState ARray to take in these objetcs
-    //check if it exists already...if it does than remove it from the array
-    //otheriswe just add it to the array 
-
-
-
-
-
-    // Create tweet object
     const tweetObj = {
       id: tweetId.split("/").pop(),
       username: tweetId.split("/")[3],
       tweetLink: tweetId,
     };
+
     console.log(tweetObj)
+ 
+    //POST 
+
+  // OR CHECK IF IT EXISTS AND DELETE
+
+
 
   };
+
+ 
 
   const iconStyles = {
     ...currentStyles,
@@ -103,6 +101,7 @@ const IconComponent = ({ tabindex, onClick, tweetId, tweetLinkElement, defaultCl
     borderRadius: "50%",
     transition: "color 0.3s ease, transform 0.3s ease",
   };
+
 
 
 
