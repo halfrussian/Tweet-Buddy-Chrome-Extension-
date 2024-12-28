@@ -82,6 +82,10 @@ const IconComponent = ({ tabindex, onClick, tweetId, tweetURL, tweetLinkElement,
 
  
   const handleClick = () => {
+
+
+
+    // NEXTY WORK ON CONSOL>LOGGING TWEET CONTENT IF THATS EVEN POSSIBLE? 
   
     const newClickedState = !isClicked;
     setIsClicked(newClickedState);
@@ -90,14 +94,12 @@ const IconComponent = ({ tabindex, onClick, tweetId, tweetURL, tweetLinkElement,
     onClick(tweetId, newClickedState);
 
     const tweetObj = {
-      // id: tweetURL.split("/").pop(),
-      // username: tweetURL.split("/")[3],
-      // tweetLink: tweetURL,
       id: tweetURL.split("/status/")[1].split("/")[0],
-      username: tweetURL.split("/")[2],
-      tweetLink: tweetURL,
+      username: tweetURL.split("x.com/")[1].split("/")[0], 
+      tweetLink: tweetURL, 
     };
-    console.log(tweetObj)
+    
+    console.log(tweetObj);
 
     //array of tweets
 
@@ -109,14 +111,6 @@ const IconComponent = ({ tabindex, onClick, tweetId, tweetURL, tweetLinkElement,
 
   clickedTweetsArray.push(tweetObj);
   localStorage.setItem('tweetsArray', JSON.stringify(clickedTweetsArray));
-    //array of tweets
-
- 
-    //push tweet objects to array 
-    //keep adding them
-    //so if i click 5 tweet there shiould by 5 tweet objetcs
-    //if an id matches one of the other tweets id 
-    // delted it from the arroy
 
    
    //
