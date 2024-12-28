@@ -8,12 +8,20 @@ const clickedTweets = new Map();
 // Store initial tweet states from localStorage
 const initialState = JSON.parse(localStorage.getItem('clickedTweets')) || {};
 
+
 function addReactIconToTweet(tweetElement) {
   const likeButton = tweetElement.querySelector('[data-testid="like"], [data-testid="unlike"]');
   const tweetLinkElement = tweetElement.querySelector("a[href*='/status/']");
-  const tweetId = tweetLinkElement ? tweetLinkElement.href : null;
+ 
+  const tweetURL = tweetLinkElement ? tweetLinkElement.href : null;
 
-  if (!tweetId || processedTweets.has(tweetElement)) return;
+  if (!tweetURL || processedTweets.has(tweetElement)) return;
+
+  const tweetId = tweetURL.split("/status/")[1].split("/")[0];
+
+  ///https://x.com/RedPillSayian/status/1873045254863253902
+   //https://x.com/WomenBeingAwful/status/1873046852645658951/photo/1
+   //https://x.com/HPE/status/1866179037678457264/analytics
 
   const iconWrapper = document.createElement("div");
   iconWrapper.className = "react-icon-wrapper";
@@ -21,6 +29,7 @@ function addReactIconToTweet(tweetElement) {
   createRoot(iconWrapper).render(
     <IconComponent
       tabindex={likeButton.tabIndex}
+      tweetURL={tweetURL}
       tweetId={tweetId}
       tweetLinkElement={tweetLinkElement}
       defaultClickedState={initialState[tweetId] === "true"}
@@ -29,6 +38,7 @@ function addReactIconToTweet(tweetElement) {
         localStorage.setItem('clickedTweets', JSON.stringify(initialState)); // Save updated state
         clickedTweets.set(id, isClicked); // Update clicked state
       }}
+
     />
   );
 

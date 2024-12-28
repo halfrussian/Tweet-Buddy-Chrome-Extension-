@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const IconComponent = ({ tabindex, onClick, tweetId, tweetLinkElement, defaultClickedState = false }) => {
+const IconComponent = ({ tabindex, onClick, tweetId, tweetURL, tweetLinkElement, defaultClickedState = false }) => {
   const isHomepage = window.location.pathname === "/home" || /^[\/][a-zA-Z0-9_-]+$/.test(window.location.pathname);
   const isStatusPage = window.location.pathname.includes("/status");
 
@@ -67,30 +67,62 @@ const IconComponent = ({ tabindex, onClick, tweetId, tweetLinkElement, defaultCl
     }
   }, [tabindex, isHomepage, isStatusPage]);
 
+
+
+  useEffect(() => {
+    const storedState = localStorage.getItem('clickedTweets');
+    const parsedState = JSON.parse(storedState || '{}');
+   
+    setIsClicked(parsedState[tweetId] === "true");
+  }, [tweetId]);
+
+
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
 
  
   const handleClick = () => {
+  
     const newClickedState = !isClicked;
     setIsClicked(newClickedState);
-
+    const updatedState = { ...JSON.parse(localStorage.getItem('clickedTweets') || '{}'), [tweetId]: newClickedState.toString() };
+    localStorage.setItem('clickedTweets', JSON.stringify(updatedState));
     onClick(tweetId, newClickedState);
 
     const tweetObj = {
-      id: tweetId.split("/").pop(),
-      username: tweetId.split("/")[3],
-      tweetLink: tweetId,
+      // id: tweetURL.split("/").pop(),
+      // username: tweetURL.split("/")[3],
+      // tweetLink: tweetURL,
+      id: tweetURL.split("/status/")[1].split("/")[0],
+      username: tweetURL.split("/")[2],
+      tweetLink: tweetURL,
     };
-
     console.log(tweetObj)
+
+    //array of tweets
+
+  const clickedTweetsArray = JSON.parse(localStorage.getItem('tweetsArray') || '[]');
+  const existingTweetIndex = clickedTweetsArray.findIndex((tweet) => tweet.id === tweetObj.id);
+  if (existingTweetIndex !== -1) {
+    clickedTweetsArray.splice(existingTweetIndex, 1);
+  }
+
+  clickedTweetsArray.push(tweetObj);
+  localStorage.setItem('tweetsArray', JSON.stringify(clickedTweetsArray));
+    //array of tweets
+
  
-    //POST 
+    //push tweet objects to array 
+    //keep adding them
+    //so if i click 5 tweet there shiould by 5 tweet objetcs
+    //if an id matches one of the other tweets id 
+    // delted it from the arroy
+
+   
+   //
+  //   POST 
 
   // OR CHECK IF IT EXISTS AND DELETE
-
-
-
   };
 
  
@@ -101,7 +133,6 @@ const IconComponent = ({ tabindex, onClick, tweetId, tweetLinkElement, defaultCl
     borderRadius: "50%",
     transition: "color 0.3s ease, transform 0.3s ease",
   };
-
 
 
 
