@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 
+
 const IconComponent = ({ tabindex, onClick, tweetId, tweetURL, tweetLinkElement, defaultClickedState = false }) => {
   const isHomepage = window.location.pathname === "/home" || /^[\/][a-zA-Z0-9_-]+$/.test(window.location.pathname);
   const isStatusPage = window.location.pathname.includes("/status");
@@ -83,6 +84,8 @@ const IconComponent = ({ tabindex, onClick, tweetId, tweetURL, tweetLinkElement,
  
   const handleClick = () => {
 
+    //API KEy 
+
 
 
     // NEXTY WORK ON CONSOL>LOGGING TWEET CONTENT IF THATS EVEN POSSIBLE? 
@@ -102,6 +105,24 @@ const IconComponent = ({ tabindex, onClick, tweetId, tweetURL, tweetLinkElement,
     console.log(tweetObj);
 
     //array of tweets
+
+    const tweetElement = tweetLinkElement.closest('[data-testid="tweet"]'); // Locate the tweet element
+    if (tweetElement) {
+      const text = tweetElement.querySelector('div[lang]')?.innerText || "No text found";
+      const images = [...tweetElement.querySelectorAll('img[src*="twimg.com"]')].map(img => img.src);
+      const videos = [...tweetElement.querySelectorAll('video[src]')].map(video => video.src);
+  
+      console.log("Tweet Content:", {
+        //this gets any and all text made by the poster 
+        text,
+        //this get profile image not contnet
+        images,
+        //not woring 
+        videos,
+      });
+    } else {
+      console.log("Tweet element not found for extracting content.");
+    }
 
   const clickedTweetsArray = JSON.parse(localStorage.getItem('tweetsArray') || '[]');
   const existingTweetIndex = clickedTweetsArray.findIndex((tweet) => tweet.id === tweetObj.id);

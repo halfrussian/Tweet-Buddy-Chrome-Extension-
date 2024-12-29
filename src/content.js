@@ -19,9 +19,6 @@ function addReactIconToTweet(tweetElement) {
 
   const tweetId = tweetURL.split("/status/")[1].split("/")[0];
 
-  ///https://x.com/RedPillSayian/status/1873045254863253902
-   //https://x.com/WomenBeingAwful/status/1873046852645658951/photo/1
-   //https://x.com/HPE/status/1866179037678457264/analytics
 
   const iconWrapper = document.createElement("div");
   iconWrapper.className = "react-icon-wrapper";
