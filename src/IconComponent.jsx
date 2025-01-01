@@ -85,9 +85,6 @@ const IconComponent = ({ tabindex, onClick, tweetId, tweetURL, tweetLinkElement,
   const handleClick = () => {
 
     //API KEy 
-
-
-
     // NEXTY WORK ON CONSOL>LOGGING TWEET CONTENT IF THATS EVEN POSSIBLE? 
   
     const newClickedState = !isClicked;
@@ -102,9 +99,28 @@ const IconComponent = ({ tabindex, onClick, tweetId, tweetURL, tweetLinkElement,
       tweetLink: tweetURL, 
     };
     
-    console.log(tweetObj);
 
-    //array of tweets
+    console.log(tweetObj.id);
+
+      fetch(`http://localhost:5000/api/tweets/${tweetObj.id}`, {
+        method: "GET",
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Failed to fetch or save tweet to the backend");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log("Tweet saved successfully:", data);
+        })
+        .catch((error) => {
+          console.error("Error while fetching and saving tweet:", error);
+        });
+   
+    
+ 
+
 
     const tweetElement = tweetLinkElement.closest('[data-testid="tweet"]'); // Locate the tweet element
     if (tweetElement) {
@@ -139,8 +155,10 @@ const IconComponent = ({ tabindex, onClick, tweetId, tweetURL, tweetLinkElement,
 
   // OR CHECK IF IT EXISTS AND DELETE
   };
+  
 
- 
+
+
 
   const iconStyles = {
     ...currentStyles,
