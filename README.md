@@ -18,3 +18,8 @@ Build with
 npx webpack --mode production
 
 Then add chrome extension to browser
+
+### How it works
+
+https://youtu.be/sZihLu1aCMk?si=NTu8AVlH-nGOWo3w
+![Screenshot 2025-01-06 at 11 05 08 AM](https://github.com/user-attachments/assets/6f460641-4b26-460d-888b-dc38bd977870)
