@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-
 const IconComponent = ({ tabindex, onClick, tweetId, tweetURL, tweetLinkElement, defaultClickedState = false }) => {
   const isHomepage = window.location.pathname === "/home" || /^[\/][a-zA-Z0-9_-]+$/.test(window.location.pathname);
   const isStatusPage = window.location.pathname.includes("/status");
@@ -8,7 +7,6 @@ const IconComponent = ({ tabindex, onClick, tweetId, tweetURL, tweetLinkElement,
   const [isClicked, setIsClicked] = useState(defaultClickedState); // Persist click state
   const [isHovered, setIsHovered] = useState(false); // Track hover state
  
-
   const hoverColor = "#58a6ff";
   const defaultColor = "#71767B";
 
@@ -83,9 +81,6 @@ const IconComponent = ({ tabindex, onClick, tweetId, tweetURL, tweetLinkElement,
 
  
   const handleClick = () => {
-
-    //API KEy 
-    // NEXTY WORK ON CONSOL>LOGGING TWEET CONTENT IF THATS EVEN POSSIBLE? 
   
     const newClickedState = !isClicked;
     setIsClicked(newClickedState);
@@ -148,12 +143,6 @@ const IconComponent = ({ tabindex, onClick, tweetId, tweetURL, tweetLinkElement,
 
   clickedTweetsArray.push(tweetObj);
   localStorage.setItem('tweetsArray', JSON.stringify(clickedTweetsArray));
-
-   
-   //
-  //   POST 
-
-  // OR CHECK IF IT EXISTS AND DELETE
   };
   
 
@@ -166,9 +155,6 @@ const IconComponent = ({ tabindex, onClick, tweetId, tweetURL, tweetLinkElement,
     borderRadius: "50%",
     transition: "color 0.3s ease, transform 0.3s ease",
   };
-
-
-
 
   return (
     <button
